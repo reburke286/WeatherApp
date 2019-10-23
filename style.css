@@ -11,3 +11,11 @@ ul {
 #row {
     margin-left: -100px;    
 }
+
+.col-sm {
+    background-color: rgb(0, 217, 255);
+    min-height: 200px;  
+    padding: 5px 10px;
+    margin: 5px;
+    text-align: center;
+}

@@ -2,64 +2,96 @@ var recentSearches = ["example city 1", "example city 2"]
 
 function displayWeatherInfo() {
 
-    var city = $(this).attr("data-name");
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
+    // var city = $(this).attr("data-name");
+    var city = $("#city-input").val();
+    // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
     var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
+    // var indexURL = "http://api.openweathermap.org/data/2.5/uvi?lat=37.75&lon=-122.37&APPID=9859fc6998842f2d4d3f91cde44162d0";
     // Creating an AJAX call for the specific city being searched
    
     $.ajax({
-      url: queryURL,
+    //   url: queryURL,
       url: forecastURL,
       method: "GET"
     }).then(function(response) {
 
       // Creating a div to hold the city
-      var cityDiv = $(".city-div");
+    //   var cityDiv = $(".city-div");
 
-      // Storing the city data
-      var cityName = response.City;
+    //   // Storing the city data
+    //   var cityName = response.name;
 
-      // Creating an element to have the city displayed
-      var h4Tag = $("<h4>").text(cityName);
+    //   // Creating an element to have the city displayed
+    //   var h4Tag = $(".city-name").text(cityName);
 
-      // Displaying city
-      cityDiv.append(h4Tag);
+    //   // Displaying city
+    //   cityDiv.append(h4Tag);
+      console.log(response);
 
-      // Storing the temperature
-      var temperature = response.Temperature;
+    //   // Storing the temperature
+    //   var temperature = response.main.temp ;
+    //   var tempFarenheit = (temperature - 273.15) * 1.8 + 32;
+    //   var tempFixed = tempFarenheit.toFixed(1);
+    //   var icon = response.weather[0].icon;
 
-      // Creating an element to hold the temperature
-      var pTemp = $("<p>").text("Temperature: " + temperature + weather.icon);
+    //   //   Creating an element to hold the temperature
+    //   var pTemp = $(".temp").text("Temperature: " + tempFixed + "°" + " " + icon);
 
-      // Displaying the temperature
-      cityDiv.append(pTemp);
+    //   // Displaying the temperature
+    //   cityDiv.append(pTemp);
 
-      // Storing the humidity
-      var humidity = response.Humidity;
+    //   // Storing the humidity
+    //   var humidity = response.main.humidity;
 
-      // Creating an element to hold the humidity
-      var pHumid = $("<p>").text("Humidity: " + humidity);
+    //   // Creating an element to hold the humidity
+    //   var pHumid = $(".humid").text("Humidity: " + humidity);
 
-      // Appending the humidity
-      cityDiv.append(pHumid);
+    //   // Appending the humidity
+    //   cityDiv.append(pHumid);
       
-      // Storing the wind speed
-      var windSpeed = response.wind.speed;
+    //   // Storing the wind speed
+    //   var windSpeed = response.wind.speed;
 
-      // Creating an element to hold the humidity
-      var pWind = $("<p>").text("Wind Speed: " + windSpeed);
+    //   // Creating an element to hold the wind speed
+    //   var pWind = $(".wind-speed").text("Wind Speed: " + windSpeed);
 
-      // Appending the humidity
-      cityDiv.append(pWind);
+    //   // Appending the wind speed
+    //   cityDiv.append(pWind);
 
-      // Storing the humidity
-      var UVIndex = response.UVIndex;
+    //   // Storing the UV Index
+    //   var UVIndex = response.UVIndex;
 
-      // Creating an element to hold the humidity
-      var pIndex = $("<p>").text("UV Index: " + UVIndex);
+    //   // Creating an element to hold the humidity
+    //   var pIndex = $("<p>").text("UV Index: " + UVIndex);
 
-      // Appending the humidity
-      cityDiv.append(pIndex);
+    //   // Appending the humidity
+    //   cityDiv.append(pIndex);
+
+    
+
+
+    // Storing Day One
+    var dayOne = response.list[0].dt_txt;
+
+    // Appending Day Two Forecast
+
+    // Storing Day Two
+    var dayTwo = response.list[1].dt_txt;
+
+    // Appending Day Three Forecast
+
+    // Storing Day Three
+    var dayThree = response.list[2].dt_txt;
+
+    // Appending Day Four Forecast
+
+    // Storing Day Four
+    var dayFour = response.list[3].dt_txt;
+
+    // Appending Day Five Forecast
+
+    // Storing Day Five
+    var dayFive = response.list[4].dt_txt;
     });
 
   }
