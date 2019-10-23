@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row flex-xl" id="row">
+            <div class="col-12 col-md-3 col-xl-3 bd-sidebar">
+            
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    Search for a city:
+                </li>
+            </ul>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-primary" type="button" id="button-addon2">Search</button>
+                </div>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    Recent Searches:
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Example City</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Example City</a>
+                </li>
+            </div>
+
+            <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+                <div>
+                    <h3>
+                        City Result
+                    </h3>
+                    <p>
+                        Temperature:
+                    </p>
+                    <p>
+                        Humidity:
+                    </p>
+                    <p>
+                        Wind Speed:
+                    </p>
+                    <p>
+                        UV Index:
+                    </p>
+                </div>
+                <div>
+                    <div class="row">
+                        <h4>
+                            5 Day Forecast:
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            Day One Image
+                        </div>
+                        <div class="col-sm">
+                            Day Two Image
+                        </div>
+                        <div class="col-sm">
+                            Day Three Image
+                        </div>
+                        <div class="col-sm">
+                            Day Four Image
+                        </div>
+                        <div class="col-sm">
+                            Day Five Image
+                        </div>
+                    </div>
+                </div>
+            </main>
+    </div>
+</div>
+
+
+    
+</body>
+</html>
