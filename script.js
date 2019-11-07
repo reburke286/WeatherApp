@@ -1,4 +1,7 @@
-var recentSearches = ["example city 1", "example city 2"]
+var recentSearches = ["example city 1", "example city 2"];
+var latPush = [""];
+var lonPush = [""];
+
 
 function displayWeatherInfo() {
 
@@ -11,6 +14,10 @@ function displayWeatherInfo() {
       // url: forecastURL,
       method: "GET"
     }).then(function(response) {
+      var lat = response.coord.lat;
+      var lon = response.coord.lon;
+      latPush.push(lat);
+      lonPush.push(lon);
 
       // Creating a div to hold the city
       var cityDiv = $(".city-div");
@@ -57,36 +64,33 @@ function displayWeatherInfo() {
 
       // Appending the wind speed
       cityDiv.append(pWind);
-
-      // Storing the UV Index
-      var UVIndex = response.UVIndex;
-
-      // Creating an element to hold the humidity
-      var pIndex = $("<p>").text("UV Index: " + UVIndex);
-
-      // Appending the humidity
-      cityDiv.append(pIndex);
+      findUVIndex();
     });
 
   };
 
-  // function displayUVIndex() {
+  function findUVIndex() {
+      console.log(latPush[1]);
+      console.log(lonPush[1]);
 
-  //   var lat = ""
-  //   var lon = ""
+    var indexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID=9859fc6998842f2d4d3f91cde44162d0&lat=" + latPush[1] + "&lon=" + lonPush[1];
 
-  //   var city = $("#city-input").val();
-  //   var indexURL = "http://api.openweathermap.org/data/2.5/uvi?" + lat + lon + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
+    $.ajax({
+      url: indexURL,
+      method: "GET"
+    }).then(function(response) {
+      var UVIndex = response.value;
 
+      // Creating an element to hold the humidity
+      var pIndex = $("<p>").text("UV Index: " + UVIndex);
+  
+      // Appending the humidity
+      var cityDiv = $(".city-div");
+      cityDiv.append(pIndex);  
 
-  //   $.ajax({
-  //     url: indexURL,
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
-    
-  //   });
-  // };
+    }); 
+  
+   };
 
   function displayForecast() {
 
@@ -97,17 +101,16 @@ function displayWeatherInfo() {
       url: forecastURL,
       method: "GET"
     }).then(function(response) {
-
       console.log(response);
-      console.log(response.list[0].weather[0].icon);
    
     // Creating a div to hold Day One
     var dayOneDiv = $("#day-one");
 
+    // Storing Day One Date
+    var dayOneDate = moment().format("M/D/YYYY");
     // Storing Day One Icon
     var dayOneIcon = response.list[0].weather[0].icon;
     var dayOneIconImage = "http://api.openweathermap.org/img/w/" + dayOneIcon + ".png";
-    console.log(dayOneIconImage);
     var dayOneIconImageApp = $("<img>").attr("src", dayOneIconImage);
     // Storing Day One Temp
     var tempDayOne = response.list[0].main.temp;
@@ -117,16 +120,41 @@ function displayWeatherInfo() {
     var humidDayOne = response.list[0].main.humidity;
 
     // Creating an element to have Day One Info displayed
-    var pTempDayOne = $("<p>").text("Temp: " + tempFixedDayOne + "°")
+    var pDayOneDate = $("<p>").text(dayOneDate);
+    var pTempDayOne = $("<p>").text("Temp: " + tempFixedDayOne + "°F")
     var pHumid = $("<p>").text("Humidity: " + humidDayOne + "%")
     // Appending Day One Forecast
+    dayOneDiv.append(pDayOneDate);
     dayOneDiv.append(dayOneIconImageApp);
     dayOneDiv.append(pTempDayOne);
     dayOneDiv.append(pHumid);
 
-    // // Storing Day Two
-    // var dayTwo = response.list[1].dt_txt;
-    // // Appending Day Two Forecast
+    // Creating a div to hold Day Two
+    var dayTwoDiv = $("#day-two");
+    // Storing Day Two
+    var dayTwoDate = moment().add(1, "days").format("M/D/YYYY");
+    // Storing Day Two Icon
+    var dayTwoIcon = response.list[1].weather[0].icon;
+    var dayTwoIconImage = "http://api.openweathermap.org/img/w/" + dayTwoIcon + ".png";
+    var dayTwoIconImageApp = $("<img>").attr("src", dayTwoIconImage);
+    // Storing Day Two Temp
+    var tempDayTwo = response.list[1].main.temp;
+    var tempFarenheitDayTwo = (tempDayTwo - 273.15) * 1.8 + 32;
+    var tempFixedDayTwo = tempFarenheitDayTwo.toFixed(1);
+    // Storing Day Two Humidity
+    var humidDayTwo = response.list[1].main.humidity;
+    // Creating an element to have Day One Info displayed
+    var pDayTwoDate = $("<p>").text(dayTwoDate);
+    var pTempDayTwo = $("<p>").text("Temp: " + tempFixedDayTwo + "°F")
+    var pHumidTwo = $("<p>").text("Humidity: " + humidDayTwo + "%")
+    // Appending Day One Forecast
+    dayTwoDiv.append(pDayTwoDate);
+    dayTwoDiv.append(dayTwoIconImageApp);
+    dayTwoDiv.append(pTempDayTwo);
+    dayTwoDiv.append(pHumidTwo);
+
+
+    // Appending Day Two Forecast
 
     // // Storing Day Three
     // var dayThree = response.list[2].dt_txt;
@@ -146,14 +174,10 @@ function displayWeatherInfo() {
   })
 
     
-};
+};   
 
-  
-
-
-   
-  
-
+  $(document).on("click", "#button-addon2", displayWeatherInfo);
+  $(document).on("click", "#button-addon2", displayForecast);
   $("#button-addon2").on("click", function(event) {
     event.preventDefault();
     // This line grabs the input from the textbox
@@ -164,8 +188,5 @@ function displayWeatherInfo() {
     console.log(recentSearches);
 
     // Calling renderButtons which handles the processing of our movie array
-    renderButtons();
+    // renderButtons();
   });
-
-  $(document).on("click", "#button-addon2", displayWeatherInfo);
-  $(document).on("click", "#button-addon2", displayForecast);
