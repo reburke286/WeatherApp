@@ -1,11 +1,11 @@
-var recentSearches = ["example city 1", "example city 2"];
+$(document).ready(function(){
+
 var latPush = [""];
 var lonPush = [""];
 
-
 function displayWeatherInfo() {
 
-    var city = $("#city-input").val();
+    var city = $("#city-input").val().trim();
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
     // Creating an AJAX call for the specific city being searched
    
@@ -70,8 +70,6 @@ function displayWeatherInfo() {
   };
 
   function findUVIndex() {
-      console.log(latPush[1]);
-      console.log(lonPush[1]);
 
     var indexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID=9859fc6998842f2d4d3f91cde44162d0&lat=" + latPush[1] + "&lon=" + lonPush[1];
 
@@ -101,7 +99,6 @@ function displayWeatherInfo() {
       url: forecastURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
    
     // Creating a div to hold Day One
     var dayOneDiv = $("#day-one");
@@ -147,46 +144,145 @@ function displayWeatherInfo() {
     var pDayTwoDate = $("<p>").text(dayTwoDate);
     var pTempDayTwo = $("<p>").text("Temp: " + tempFixedDayTwo + "°F")
     var pHumidTwo = $("<p>").text("Humidity: " + humidDayTwo + "%")
-    // Appending Day One Forecast
+    // Appending Day Two Forecast
     dayTwoDiv.append(pDayTwoDate);
     dayTwoDiv.append(dayTwoIconImageApp);
     dayTwoDiv.append(pTempDayTwo);
     dayTwoDiv.append(pHumidTwo);
 
+    // Creating a div to hold Day Three
+    var dayThreeDiv = $("#day-three");
+    // Storing Day Three
+    var dayThreeDate = moment().add(2, "days").format("M/D/YYYY");
+    // Storing Day Three Icon
+    var dayThreeIcon = response.list[2].weather[0].icon;
+    var dayThreeIconImage = "http://api.openweathermap.org/img/w/" + dayThreeIcon + ".png";
+    var dayThreeIconImageApp = $("<img>").attr("src", dayThreeIconImage);
+    // Storing Day Three Temp
+    var tempDayThree = response.list[2].main.temp;
+    var tempFarenheitDayThree = (tempDayThree - 273.15) * 1.8 + 32;
+    var tempFixedDayThree = tempFarenheitDayThree.toFixed(1);
+    // Storing Day Three Humidity
+    var humidDayThree = response.list[2].main.humidity;
+    // Creating an element to have Day Three Info displayed
+    var pDayThreeDate = $("<p>").text(dayThreeDate);
+    var pTempDayThree = $("<p>").text("Temp: " + tempFixedDayThree + "°F")
+    var pHumidThree = $("<p>").text("Humidity: " + humidDayThree + "%")
+    // Appending Day One Forecast
+    dayThreeDiv.append(pDayThreeDate);
+    dayThreeDiv.append(dayThreeIconImageApp);
+    dayThreeDiv.append(pTempDayThree);
+    dayThreeDiv.append(pHumidThree);
 
-    // Appending Day Two Forecast
+    // Creating a div to hold Day Two
+    var dayFourDiv = $("#day-four");
+    // Storing Day Two
+    var dayFourDate = moment().add(3, "days").format("M/D/YYYY");
+    // Storing Day Two Icon
+    var dayFourIcon = response.list[3].weather[0].icon;
+    var dayFourIconImage = "http://api.openweathermap.org/img/w/" + dayFourIcon + ".png";
+    var dayFourIconImageApp = $("<img>").attr("src", dayFourIconImage);
+    // Storing Day Two Temp
+    var tempDayFour = response.list[3].main.temp;
+    var tempFarenheitDayFour = (tempDayFour - 273.15) * 1.8 + 32;
+    var tempFixedDayFour = tempFarenheitDayFour.toFixed(1);
+    // Storing Day Two Humidity
+    var humidDayFour = response.list[3].main.humidity;
+    // Creating an element to have Day One Info displayed
+    var pDayFourDate = $("<p>").text(dayFourDate);
+    var pTempDayFour = $("<p>").text("Temp: " + tempFixedDayFour + "°F")
+    var pHumidFour = $("<p>").text("Humidity: " + humidDayFour + "%")
+    // Appending Day One Forecast
+    dayFourDiv.append(pDayFourDate);
+    dayFourDiv.append(dayFourIconImageApp);
+    dayFourDiv.append(pTempDayFour);
+    dayFourDiv.append(pHumidFour);
 
-    // // Storing Day Three
-    // var dayThree = response.list[2].dt_txt;
-
-    // // Appending Day Three Forecast
-
-    // // Storing Day Four
-    // var dayFour = response.list[3].dt_txt;
-
-    //  // Appending Day Four Forecast
-
-    // // Storing Day Five
-    // var dayFive = response.list[4].dt_txt;
-
-    //  // Appending Day Five Forecast
-
-  })
-
-    
+  // Creating a div to hold Day Two
+  var dayFiveDiv = $("#day-five");
+  // Storing Day Two
+  var dayFiveDate = moment().add(4, "days").format("M/D/YYYY");
+  // Storing Day Two Icon
+  var dayFiveIcon = response.list[4].weather[0].icon;
+  var dayFiveIconImage = "http://api.openweathermap.org/img/w/" + dayFiveIcon + ".png";
+  var dayFiveIconImageApp = $("<img>").attr("src", dayFiveIconImage);
+  // Storing Day Two Temp
+  var tempDayFive = response.list[4].main.temp;
+  var tempFarenheitDayFive = (tempDayFive - 273.15) * 1.8 + 32;
+  var tempFixedDayFive = tempFarenheitDayFive.toFixed(1);
+  // Storing Day Two Humidity
+  var humidDayFive = response.list[4].main.humidity;
+  // Creating an element to have Day One Info displayed
+  var pDayFiveDate = $("<p>").text(dayFiveDate);
+  var pTempDayFive = $("<p>").text("Temp: " + tempFixedDayFive + "°F")
+  var pHumidFive = $("<p>").text("Humidity: " + humidDayFive + "%")
+  // Appending Day One Forecast
+  dayFiveDiv.append(pDayFiveDate);
+  dayFiveDiv.append(dayFiveIconImageApp);
+  dayFiveDiv.append(pTempDayFive);
+  dayFiveDiv.append(pHumidFive);
+})  
 };   
 
-  $(document).on("click", "#button-addon2", displayWeatherInfo);
-  $(document).on("click", "#button-addon2", displayForecast);
-  $("#button-addon2").on("click", function(event) {
-    event.preventDefault();
-    // This line grabs the input from the textbox
+function displayingRecentSearches() {
+    var recentSearches = getCitiesFromLocalStorage();
+    localStorage.getItem("recentSearches");
+    var recentSearchesDiv = $("#search");
+    var li = $("<li>");
+
+    // Creating element for first search history 
+    var exampleCityOne = $("<a class=\"nav-link active\">")
+    exampleCityOne.text(recentSearches[recentSearches.length - 1]);
+    exampleCityOne.attr("href", "#");
+    if (!exampleCityOne) {
+      return exampleCityOne;
+    }
+
+    // Creating element for second search history
+    var exampleCityTwo = $("<a class=\"nav-link active\">")
+    exampleCityTwo.text(recentSearches[recentSearches.length - 2]);
+    exampleCityTwo.attr("href", "#");
+    if (!exampleCityTwo) {
+      return exampleCityTwo;
+    }
+
+    // Creating element for three search history
+    // var exampleCityThree = $("<a class=\"nav-link active\">")
+    // exampleCityThree.text(recentSearches[2]);
+    // exampleCityThree.attr("href", "#");
+    // if (exampleCityThree === null | exampleCityThree === 'undefined') {
+    //   return exampleCityThree;
+    // }
+
+   
+    recentSearchesDiv.append(li);
+    li.append(exampleCityOne);
+    li.append(exampleCityTwo);
+    // li.append(exmapleCityThree);
+};
+
+function addRecentSearches() {
     var city = $("#city-input").val().trim();
-
-    // Adding movie from the textbox to our array
+    var recentSearches = getCitiesFromLocalStorage();
     recentSearches.push(city);
+    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
     console.log(recentSearches);
+    };
 
-    // Calling renderButtons which handles the processing of our movie array
-    // renderButtons();
-  });
+  function getCitiesFromLocalStorage() {
+    var recentSearches = JSON.parse(localStorage.getItem("recentSearches"));
+    if (!recentSearches) {
+        recentSearches = [];
+    }
+    return recentSearches;
+  };
+  displayingRecentSearches();
+
+
+$(document).on("click", "#button-addon2", function() {
+  displayWeatherInfo();
+  displayForecast();
+  addRecentSearches();
+});
+
+});
