@@ -8,7 +8,6 @@ function displayWeatherInfo() {
     var city = $("#city-input").val().trim();
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
     // Creating an AJAX call for the specific city being searched
-   
     $.ajax({
       url: queryURL,
       // url: forecastURL,
@@ -226,47 +225,31 @@ function displayWeatherInfo() {
 
 function displayingRecentSearches() {
     var recentSearches = getCitiesFromLocalStorage();
+    var threeCities = recentSearches.slice(0, 3)
     localStorage.getItem("recentSearches");
     var recentSearchesDiv = $("#search");
     var li = $("<li>");
-
-    // Creating element for first search history 
-    var exampleCityOne = $("<a class=\"nav-link active\">")
-    exampleCityOne.text(recentSearches[recentSearches.length - 1]);
-    exampleCityOne.attr("href", "#");
-    if (!exampleCityOne) {
-      return exampleCityOne;
-    }
-
-    // Creating element for second search history
-    var exampleCityTwo = $("<a class=\"nav-link active\">")
-    exampleCityTwo.text(recentSearches[recentSearches.length - 2]);
-    exampleCityTwo.attr("href", "#");
-    if (!exampleCityTwo) {
-      return exampleCityTwo;
-    }
-
-    // Creating element for three search history
-    // var exampleCityThree = $("<a class=\"nav-link active\">")
-    // exampleCityThree.text(recentSearches[2]);
-    // exampleCityThree.attr("href", "#");
-    // if (exampleCityThree === null | exampleCityThree === 'undefined') {
-    //   return exampleCityThree;
-    // }
-
-   
     recentSearchesDiv.append(li);
-    li.append(exampleCityOne);
-    li.append(exampleCityTwo);
-    // li.append(exmapleCityThree);
+
+    for (var i = 0; i < threeCities.length; i++) {
+      if (threeCities.length === 1 | threeCities.length === 2 | threeCities.length === 3) {
+        var exampleCity = $("<a class=\"nav-link active\">")
+        exampleCity.text(recentSearches[i]);
+        exampleCity.attr("href", "#");
+        li.append(exampleCity);
+      }
+       
+    }
+
 };
 
 function addRecentSearches() {
     var city = $("#city-input").val().trim();
     var recentSearches = getCitiesFromLocalStorage();
-    recentSearches.push(city);
+    recentSearches.unshift(city);
     localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
     console.log(recentSearches);
+
     };
 
   function getCitiesFromLocalStorage() {
