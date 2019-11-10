@@ -26,7 +26,7 @@ function clearOldSearch() {
   if (dayThreeDiv !== "") {
     dayThreeDiv.html("")
   }
-
+  
   if (dayFourDiv !== "") {
     dayFourDiv.html("")
   }
@@ -38,7 +38,7 @@ function clearOldSearch() {
 
 
 function displayWeatherInfo() {
-
+  
     var city = $("#city-input").val().trim();
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
     // Creating an AJAX call for the specific city being searched
@@ -263,21 +263,15 @@ function displayingRecentSearches() {
     var threeCities = recentSearches.slice(0, 3)
     localStorage.getItem("recentSearches");
     var recentSearchDiv = $("#search-div");
-    // var recentSearchH3 = $("#search-h3")
-    // recentSearchesDiv.append(recentSearchH3);
-    // var li = $("<li>");
-    // recentSearchesDiv.append(li);
 
     for (var i = 0; i < threeCities.length; i++) {
       if (threeCities.length === 1 | threeCities.length === 2 | threeCities.length === 3) {
         var exampleCity = $("<button type=\"button\" id=\"recent-button\" class=\"btn btn-light\">")
         exampleCity.text(recentSearches[i]);
         recentSearchDiv.append(exampleCity);
-        
       }
        
     };
-    // var link = 
 };
 
 function addRecentSearches() {
