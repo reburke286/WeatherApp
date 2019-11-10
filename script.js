@@ -40,7 +40,7 @@ function clearOldSearch() {
 function displayWeatherInfo() {
 
     var city = $("#city-input").val().trim();
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
     // Creating an AJAX call for the specific city being searched
     $.ajax({
       url: queryURL,
@@ -69,7 +69,7 @@ function displayWeatherInfo() {
       var tempFarenheit = (temperature - 273.15) * 1.8 + 32;
       var tempFixed = tempFarenheit.toFixed(1);
       var icon = response.weather[0].icon;
-      var iconImage = "http://api.openweathermap.org/img/w/" + icon + ".png";
+      var iconImage = "https://api.openweathermap.org/img/w/" + icon + ".png";
       var iconImageApp = $("<img>").attr("src", iconImage);
       
 
@@ -105,7 +105,7 @@ function displayWeatherInfo() {
 
   function findUVIndex() {
 
-    var indexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID=9859fc6998842f2d4d3f91cde44162d0&lat=" + latPush[1] + "&lon=" + lonPush[1];
+    var indexURL = "https://api.openweathermap.org/data/2.5/uvi?APPID=9859fc6998842f2d4d3f91cde44162d0&lat=" + latPush[1] + "&lon=" + lonPush[1];
 
     $.ajax({
       url: indexURL,
@@ -127,7 +127,7 @@ function displayWeatherInfo() {
   function displayForecast() {
 
     var city = $("#city-input").val();
-    var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
 
     $.ajax({
       url: forecastURL,
@@ -141,7 +141,7 @@ function displayWeatherInfo() {
     var dayOneDate = moment().format("M/D/YYYY");
     // Storing Day One Icon
     var dayOneIcon = response.list[0].weather[0].icon;
-    var dayOneIconImage = "http://api.openweathermap.org/img/w/" + dayOneIcon + ".png";
+    var dayOneIconImage = "https://api.openweathermap.org/img/w/" + dayOneIcon + ".png";
     var dayOneIconImageApp = $("<img>").attr("src", dayOneIconImage);
     // Storing Day One Temp
     var tempDayOne = response.list[0].main.temp;
@@ -166,7 +166,7 @@ function displayWeatherInfo() {
     var dayTwoDate = moment().add(1, "days").format("M/D/YYYY");
     // Storing Day Two Icon
     var dayTwoIcon = response.list[1].weather[0].icon;
-    var dayTwoIconImage = "http://api.openweathermap.org/img/w/" + dayTwoIcon + ".png";
+    var dayTwoIconImage = "https://api.openweathermap.org/img/w/" + dayTwoIcon + ".png";
     var dayTwoIconImageApp = $("<img>").attr("src", dayTwoIconImage);
     // Storing Day Two Temp
     var tempDayTwo = response.list[1].main.temp;
@@ -190,7 +190,7 @@ function displayWeatherInfo() {
     var dayThreeDate = moment().add(2, "days").format("M/D/YYYY");
     // Storing Day Three Icon
     var dayThreeIcon = response.list[2].weather[0].icon;
-    var dayThreeIconImage = "http://api.openweathermap.org/img/w/" + dayThreeIcon + ".png";
+    var dayThreeIconImage = "https://api.openweathermap.org/img/w/" + dayThreeIcon + ".png";
     var dayThreeIconImageApp = $("<img>").attr("src", dayThreeIconImage);
     // Storing Day Three Temp
     var tempDayThree = response.list[2].main.temp;
@@ -214,7 +214,7 @@ function displayWeatherInfo() {
     var dayFourDate = moment().add(3, "days").format("M/D/YYYY");
     // Storing Day Two Icon
     var dayFourIcon = response.list[3].weather[0].icon;
-    var dayFourIconImage = "http://api.openweathermap.org/img/w/" + dayFourIcon + ".png";
+    var dayFourIconImage = "https://api.openweathermap.org/img/w/" + dayFourIcon + ".png";
     var dayFourIconImageApp = $("<img>").attr("src", dayFourIconImage);
     // Storing Day Two Temp
     var tempDayFour = response.list[3].main.temp;
@@ -238,7 +238,7 @@ function displayWeatherInfo() {
   var dayFiveDate = moment().add(4, "days").format("M/D/YYYY");
   // Storing Day Two Icon
   var dayFiveIcon = response.list[4].weather[0].icon;
-  var dayFiveIconImage = "http://api.openweathermap.org/img/w/" + dayFiveIcon + ".png";
+  var dayFiveIconImage = "https://api.openweathermap.org/img/w/" + dayFiveIcon + ".png";
   var dayFiveIconImageApp = $("<img>").attr("src", dayFiveIconImage);
   // Storing Day Two Temp
   var tempDayFive = response.list[4].main.temp;
