@@ -3,6 +3,40 @@ $(document).ready(function(){
 var latPush = [""];
 var lonPush = [""];
 
+function clearOldSearch() {
+  var cityDiv = $(".city-div");
+  var dayOneDiv = $("#day-one")
+  var dayTwoDiv = $("#day-two")
+  var dayThreeDiv = $("#day-three")
+  var dayFourDiv = $("#day-four")
+  var dayFiveDiv = $("#day-five")
+
+  if (cityDiv !== "") {
+    cityDiv.html("");
+  }
+
+  if (dayOneDiv !== "") {
+    dayOneDiv.html("");
+  }
+
+  if (dayTwoDiv !== "") {
+    dayTwoDiv.html("")
+  }
+
+  if (dayThreeDiv !== "") {
+    dayThreeDiv.html("")
+  }
+
+  if (dayFourDiv !== "") {
+    dayFourDiv.html("")
+  }
+
+  if (dayFiveDiv !== "") {
+    dayFiveDiv.html("")
+  } 
+};
+
+
 function displayWeatherInfo() {
 
     var city = $("#city-input").val().trim();
@@ -25,7 +59,7 @@ function displayWeatherInfo() {
       var cityName = response.name;
 
       // Creating an element to have the city displayed
-      var h3Tag = $(".city-name").text(cityName);
+      var h3Tag = $("<h3>").text(cityName);
 
       // Displaying city
       cityDiv.append(h3Tag);
@@ -40,7 +74,7 @@ function displayWeatherInfo() {
       
 
       //   Creating an element to hold the temperature
-      var pTemp = $(".temp").text("Temperature: " + tempFixed + "°");
+      var pTemp = $("<p>").text("Temperature: " + tempFixed + "°");
       pTemp.append(iconImageApp);
 
       // Displaying the temperature
@@ -50,7 +84,7 @@ function displayWeatherInfo() {
       var humidity = response.main.humidity;
 
       // Creating an element to hold the humidity
-      var pHumid = $(".humid").text("Humidity: " + humidity + "%");
+      var pHumid = $("<p>").text("Humidity: " + humidity + "%");
 
       // Appending the humidity
       cityDiv.append(pHumid);
@@ -59,12 +93,13 @@ function displayWeatherInfo() {
       var windSpeed = response.wind.speed;
 
       // Creating an element to hold the wind speed
-      var pWind = $(".wind-speed").text("Wind Speed: " + windSpeed);
+      var pWind = $("<p>").text("Wind Speed: " + windSpeed);
 
       // Appending the wind speed
       cityDiv.append(pWind);
       findUVIndex();
     });
+   
 
   };
 
@@ -239,8 +274,8 @@ function displayingRecentSearches() {
         li.append(exampleCity);
       }
        
-    }
-
+    };
+    // var link = 
 };
 
 function addRecentSearches() {
@@ -261,11 +296,24 @@ function addRecentSearches() {
   };
   displayingRecentSearches();
 
-
 $(document).on("click", "#button-addon2", function() {
+  event.preventDefault();
+ 
   displayWeatherInfo();
   displayForecast();
   addRecentSearches();
+  clearOldSearch();
 });
 
+var input = document.getElementById("city-input");
+input.addEventListener("keyup", function(event) {
+  
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    displayWeatherInfo();
+    displayForecast();
+    addRecentSearches();
+    clearOldSearch();
+  }
+});
 });
