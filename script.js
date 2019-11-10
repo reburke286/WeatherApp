@@ -262,16 +262,18 @@ function displayingRecentSearches() {
     var recentSearches = getCitiesFromLocalStorage();
     var threeCities = recentSearches.slice(0, 3)
     localStorage.getItem("recentSearches");
-    var recentSearchesDiv = $("#search");
-    var li = $("<li>");
-    recentSearchesDiv.append(li);
+    var recentSearchDiv = $("#search-div");
+    // var recentSearchH3 = $("#search-h3")
+    // recentSearchesDiv.append(recentSearchH3);
+    // var li = $("<li>");
+    // recentSearchesDiv.append(li);
 
     for (var i = 0; i < threeCities.length; i++) {
       if (threeCities.length === 1 | threeCities.length === 2 | threeCities.length === 3) {
-        var exampleCity = $("<a class=\"nav-link active\">")
+        var exampleCity = $("<button type=\"button\" id=\"recent-button\" class=\"btn btn-light\">")
         exampleCity.text(recentSearches[i]);
-        exampleCity.attr("href", "#");
-        li.append(exampleCity);
+        recentSearchDiv.append(exampleCity);
+        
       }
        
     };

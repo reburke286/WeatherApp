@@ -1,3 +1,9 @@
+body {
+    background-color: rgb(204, 221, 226);
+    color: rgb(96, 96, 96);
+}
+
+
 ul {
     padding-bottom: 20px;
     margin-top:10px;
@@ -8,15 +14,35 @@ ul {
     background-color: rgb(250, 250, 250);
 }
 
+#button-addon2 {
+    background-color: rgb(101, 196,224);
+}
+
+a {
+    color: rgb(101, 196,224);
+}
+
 #row {
     margin-left: -100px;    
 }
 
 .col-sm {
-    background-color: rgb(0, 217, 255);
+    background-color: rgb(101, 196,224);
     min-height: 200px;  
     padding: 5px 10px;
     margin: 5px;
     text-align: center;
     color: white;
 }
+
+#recent-button {
+    border: 1px solid darkgray;
+    text-align: left;
+    margin: 0px 30px 0px 0px;
+    padding: 6px 150px 6px 6px;
+}
+
+#left-div {
+    min-height: 500px;
+}
+
