@@ -37,21 +37,12 @@ $(document).ready(function(){
   };
  
  
-  function displayWeatherInfo() {
-      if ($("#city-input").val() !== "") {
-        var city = $("#city-input").val().trim()
-      }
-      else if (hasBeenClicked = true) {
-        var city = $(event.target.parentElement).find("button").val();
-      }
-      else {
-        return;
-      }
+  function displayWeatherInfo(city) {
+ 
       var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
-      // Creating an AJAX call for the specific city being searched
+      
       $.ajax({
         url: queryURL,
-        // url: forecastURL,
         method: "GET"
       }).then(function(response) {
         var lat = response.coord.lat;
@@ -131,16 +122,8 @@ $(document).ready(function(){
     
     };
 
-    function displayForecast() {
-        if ($("#city-input").val() !== "") {
-          var city = $("#city-input").val().trim()
-        }
-        else if (hasBeenClicked = true) {
-          var city = $(event.target.parentElement).find("button").val();
-        }
-        else {
-          return;
-        }
+    function displayForecast(city) {
+       
       var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&APPID=9859fc6998842f2d4d3f91cde44162d0";
 
       $.ajax({
@@ -281,7 +264,6 @@ $(document).ready(function(){
       for (var i = 0; i < threeCities.length; i++) {
         if (threeCities.length === 1 | threeCities.length === 2 | threeCities.length === 3) {
           var exampleCity = $("<button type=\"button\" class=\"btn btn-light\" value="+threeCities[i]+">")
-          // value='"+obj.value+"'>"+"LIKE"+"</button>"
           exampleCity.text(recentSearches[i]);
           recentSearchDiv.append(exampleCity);
         }
@@ -315,9 +297,13 @@ $(document).ready(function(){
 
   $(document).on("click", "#button-addon2", function() {
     event.preventDefault();
+
+    var city = $("#city-input").val().trim()
+    console.log(city);
   
-    displayWeatherInfo();
-    displayForecast();
+    displayWeatherInfo(city);
+    var city = $("#city-input").val().trim();
+    displayForecast(city);
     addRecentSearches();
     clearOldSearch();
     $("#city-input").val("");
@@ -327,9 +313,13 @@ $(document).ready(function(){
   input.addEventListener("keyup", function(event) {
     
     if (event.keyCode === 13) {
+  
+      console.log(city);
       event.preventDefault();
-      displayWeatherInfo();
-      displayForecast();
+      displayWeatherInfo(city);
+      
+
+      displayForecast(city);
       addRecentSearches();
       clearOldSearch();
       $("#city-input").val("")
@@ -338,12 +328,15 @@ $(document).ready(function(){
   var hasBeenClicked = false;
  
   $('#search-div').on('click','.btn', function(){ 
-    displayWeatherInfo();
-    displayForecast();
+    hasBeenClicked = true;
+    var city = $(this).val();
+    displayWeatherInfo(city);
+    displayForecast(city);
     addRecentSearches();
     clearOldSearch();   
-    var searchedCity = $(event.target.parentElement).find("button").val();
-    hasBeenClicked = true;
+    
+    
+    
     
 
 
