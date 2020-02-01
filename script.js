@@ -299,10 +299,8 @@ $(document).ready(function(){
     event.preventDefault();
 
     var city = $("#city-input").val().trim()
-    console.log(city);
   
     displayWeatherInfo(city);
-    var city = $("#city-input").val().trim();
     displayForecast(city);
     addRecentSearches();
     clearOldSearch();
@@ -313,8 +311,8 @@ $(document).ready(function(){
   input.addEventListener("keyup", function(event) {
     
     if (event.keyCode === 13) {
-  
-      console.log(city);
+      var city = $("#city-input").val().trim();
+
       event.preventDefault();
       displayWeatherInfo(city);
       
